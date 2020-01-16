@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../../models/usuario';
 import { Router } from '@angular/router';
+import { UsuarioService } from '../../../services/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -8,37 +9,57 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  
-  usuario:Usuario;
-  bandUsuario:boolean = false;
-  bandPassword:boolean = false;
-  textoErrorUsuario:string;
-  textoErrorPassword:string;
+  usuario: Usuario;
+  bandUsuario = false;
+  bandPassword = false;
+  textoErrorUsuario: string;
+  textoErrorPassword: string;
 
-  constructor() { 
+  constructor(private router: Router, private authService: UsuarioService) {
     this.usuario = new Usuario();
   }
 
   ngOnInit() {
   }
 
-  ingresar():void {
+  ingresar(): void {
     this.bandUsuario =  false;
     this.bandPassword =  false;
 
-    if(this.usuario.username == "" || this.usuario.username == undefined){
+    // tslint:disable-next-line: triple-equals
+    if (this.usuario.username == '' || this.usuario.username == undefined) {
       this.bandUsuario =  true;
-      this.textoErrorUsuario = "El usuario es requerido*";
+      this.textoErrorUsuario = 'El usuario es requerido*';
       return;
     }
 
-    if(this.usuario.password == "" || this.usuario.password == undefined){
+    // tslint:disable-next-line: triple-equals
+    if (this.usuario.password == '' || this.usuario.password == undefined) {
       this.bandPassword =  true;
-      this.textoErrorPassword = "La contraseña es requerida*";
+      this.textoErrorPassword = 'La contraseña es requerida*';
       return;
     }
 
-    console.log(this.bandUsuario);
+    this.authService.login(this.usuario).subscribe(response => {
+      /*this.authService.guardarUsuario(response.token);
+      this.authService.guardarToken(response.token);*/
+      this.usuario = this.authService.usuario;
+      console.log(this.usuario);
+      //this.consultarMenu(this.usuario);
+    }, err => {
+      // tslint:disable-next-line: triple-equals
+      if (err.status == 400) {
+        //swal('Error Login', 'Usuario o clave incorrectas!', 'error');
+        /*titulo = 'Mensaje del servidor';
+        mensaje = 'Usuario o password incorrectos!';
+        this.openAlertDialog(titulo, mensaje, true);*/
+      }else{
+        /*titulo = 'Error del servidor!';
+        mensaje = 'Ha ocurrido un error inesperado';
+        this.openAlertDialog(titulo, mensaje, true);*/
+      }
+    });
+
   }
 
 }
