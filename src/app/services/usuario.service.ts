@@ -84,7 +84,7 @@ export class UsuarioService {
    login(usuario: Usuario): Observable<any> {
     const urlEndpoint = this.API+'/login';
 
-    return this.http.put<any>(urlEndpoint, usuario).pipe(
+    return this.http.post<any>(urlEndpoint, usuario).pipe(
       catchError(e => {
         if(e.status==400){
             return throwError(e);
@@ -97,16 +97,18 @@ export class UsuarioService {
     );
   }
 
-  guardarUsuario(accessToken: string): void {
-    let payload = this.obtenerDatosToken(accessToken);
-    console.log(payload);
+  guardarUsuario(datos: Usuario): void {
+    /*let payload = this.obtenerDatosToken(accessToken);
+    console.log(payload);*/
     this._usuario = new Usuario();
-    this._usuario.id = payload.id;
-    this._usuario.nombre = payload.nombre;
-    this._usuario.apellido = payload.apellido;
+    this._usuario.id = datos.id;
+    this._usuario.nombre = datos.nombre;
+    this._usuario.apellido = datos.apellido;
+    this._usuario.cedula = datos.cedula;
     //this._usuario.correo = payload.email;
-    this._usuario.username = payload.user_name;
-    this._usuario.idPerfil = payload.idPerfil;
+    this._usuario.username = datos.username;
+    this._usuario.idPerfil = datos.idPerfil;
+    this.guardarToken(datos.token);
     sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
   }
 
@@ -123,8 +125,9 @@ export class UsuarioService {
   }
 
   isAuthenticated(): boolean {
-    let payload = this.obtenerDatosToken(this.token);
-    if (payload != null && payload.user_name && payload.user_name.length > 0) {
+    //let payload = this.obtenerDatosToken(this.token);
+    let token = this.token;
+    if (token != null && token) {
       this.loggedIn.next(true);
       return true;
     }

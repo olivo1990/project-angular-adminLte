@@ -11,11 +11,13 @@ import { UsuarioService } from './services/usuario.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/usuario/login/login.component';
+import { InicioComponent } from './components/inicio/inicio.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    InicioComponent
   ],
   imports: [
     BrowserModule,

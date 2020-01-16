@@ -41,10 +41,14 @@ export class LoginComponent implements OnInit {
     }
 
     this.authService.login(this.usuario).subscribe(response => {
-      /*this.authService.guardarUsuario(response.token);
-      this.authService.guardarToken(response.token);*/
+      if(response.estado == 0){
+        console.log(response.msg);
+      }
+      this.authService.guardarUsuario(response.datos);
+      //this.authService.guardarToken(response.token);
       this.usuario = this.authService.usuario;
-      console.log(this.usuario);
+      //console.log(this.usuario);
+      this.router.navigate(['/inicio']);
       //this.consultarMenu(this.usuario);
     }, err => {
       // tslint:disable-next-line: triple-equals
