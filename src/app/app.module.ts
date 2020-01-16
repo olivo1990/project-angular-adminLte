@@ -12,12 +12,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/usuario/login/login.component';
 import { InicioComponent } from './components/inicio/inicio.component';
+import { HeaderComponent } from './components/layout/header/header.component';
+import { SlidebarComponent } from './components/layout/slidebar/slidebar.component';
+import { FooterComponent } from './components/layout/footer/footer.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    InicioComponent
+    InicioComponent,
+    HeaderComponent,
+    SlidebarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

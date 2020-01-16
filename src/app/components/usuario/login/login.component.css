@@ -78,6 +78,8 @@
     transition: all 0.2s ease-in-out;
     font-size: 17px;
     font-weight: 600;
+    width: 100% !important;
+    ;
 }
 
 .buttom-login:hover {
