@@ -138,7 +138,7 @@ export class UsuarioService {
     sessionStorage.clear();
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('usuario');
-    sessionStorage.removeItem('menu');
+    //sessionStorage.removeItem('menu');
     this.loggedIn.next(false);
   }
 }

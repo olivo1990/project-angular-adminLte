@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuarioService } from '../../../services/usuario.service';
+import { Usuario } from '../../../models/usuario';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  usuario: Usuario;
+
+  constructor(private usuarioService: UsuarioService) {
+    this.usuario = new Usuario();
+   }
 
   ngOnInit() {
+    this.usuario = this.usuarioService.usuario; 
+  }
+
+  logout(): void {
+    this.usuarioService.logout();
   }
 
 }
