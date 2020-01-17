@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuarioService } from '../../../services/usuario.service';
+import { Menu } from '../../../models/menu';
+import { CompileShallowModuleMetadata } from '@angular/compiler';
 
 @Component({
   selector: 'app-slidebar',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SlidebarComponent implements OnInit {
 
-  constructor() { }
+  menu: Menu[] = [];
+
+  constructor(private usuarioService: UsuarioService) { }
 
   ngOnInit() {
+    this.menu = this.usuarioService.menu;
+
+    console.log(this.menu);
   }
 
 }

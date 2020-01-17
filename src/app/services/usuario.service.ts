@@ -5,6 +5,7 @@ import { map, catchError } from 'rxjs/operators';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { Menu } from '../models/menu';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class UsuarioService {
   private API = environment.API;
   private _usuario: Usuario;
   private _token: string;
+  private _menu: Menu[] = [];
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {
@@ -33,17 +35,6 @@ export class UsuarioService {
     return this._usuario;
   }
 
-  /*public get usuario(): Usuario {
-
-    if (this._usuario != null) {
-      return this._usuario;
-    } else if (this._usuario == null && sessionStorage.getItem('usuario') != null) {
-      this._usuario = JSON.parse(sessionStorage.getItem('usuario')) as Usuario;
-      return this._usuario;
-    }
-    return new Usuario();
-  }*/
-
   public get token(): string {
     if (this._token != null) {
       return this._token;
@@ -54,13 +45,16 @@ export class UsuarioService {
     return null;
   }
 
-
-  /*registrar(usuario: Usuario): Usuario {
-
-    this.usuario = usuario;
-
-    return this.usuario;
-  }*/
+  public get menu(): Menu[]{
+    if (this._menu.length>0) {
+      return this._menu;
+    } else if (this._menu.length === 0 && sessionStorage.getItem('menu') != null) {
+      let menu = JSON.parse(sessionStorage.getItem('menu')) as Menu[];
+      this._menu = menu;
+      return this._menu;
+    }
+    return this._menu;
+  }
 
   registrar(usuario: Usuario): Observable<Usuario> {
 
@@ -95,6 +89,10 @@ export class UsuarioService {
         return throwError(e);
       })
     );
+  }
+
+  guardarMenu(menu: Menu[]):void{
+    sessionStorage.setItem('menu', JSON.stringify(menu));
   }
 
   guardarUsuario(datos: Usuario): void {
@@ -133,13 +131,6 @@ export class UsuarioService {
     }
     return false;
   }
-
-  /*hasRole(role: string): boolean {
-    if (this._usuario.perfiles.includes(role)) {
-      return true;
-    }
-    return false;
-  }*/
 
   logout(): void {
     this._token = null;

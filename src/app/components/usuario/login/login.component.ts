@@ -47,10 +47,9 @@ export class LoginComponent implements OnInit {
       if(response.estado == 0){
         console.log(response.msg);
       }
-      this.authService.guardarUsuario(response.datos);
-      //this.authService.guardarToken(response.token);
+      this.authService.guardarUsuario(response.datos.usuario);
+      this.authService.guardarMenu(response.datos.menu);
       this.usuario = this.authService.usuario;
-      //console.log(this.usuario);
       this.router.navigate(['/inicio']);
       //this.consultarMenu(this.usuario);
     }, err => {
