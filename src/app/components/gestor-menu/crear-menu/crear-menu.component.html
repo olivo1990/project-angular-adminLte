@@ -1,0 +1,69 @@
+<button class="btn btn-primary" (click)="regresar()"><i class="fa fa-chevron-left"></i></button>
+<br>
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <h3 class="panel-title">Crear/Editar Menú</h3>
+            </div>
+            <form (ngSubmit)="crear()" #heroForm="ngForm">
+                <div class="panel-body">
+                    <div class="col-md-6">
+                        <label>Título del Menú :</label>
+                        <input type="text" name="nombre" class="form-control" required="required" placeholder="Título Menú" title="Título del Menú" [(ngModel)]="menu.nombre" />
+                        <div *ngIf="mensajeErrorTitulo !==  undefined && mensajeErrorTitulo !== ''" class="text-danger">
+                            {{mensajeErrorTitulo}}
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Enlace :</label>
+                        <input type="text" name="url" class="form-control" required="required" placeholder="Enlace" title="Enlace" [(ngModel)]="menu.url" />
+                        <div *ngIf="mensajeErrorUrl !==  undefined && mensajeErrorUrl !== ''" class="text-danger">
+                            {{mensajeErrorUrl}}
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Descripción :</label>
+                        <input type="text" name="descripcion" class="form-control" required="required" placeholder="Descripción" title="Descripción" [(ngModel)]="menu.descripcion" />
+                        <div *ngIf="mensajeErrorDescripcion !==  undefined && mensajeErrorDescripcion !== ''" class="text-danger">
+                            {{mensajeErrorUrl}}
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Target :</label><br />
+                        <select name="target" class="form-control" required="required" title="Target" [(ngModel)]="menu.target">
+                            <option value="" selected>Seleccionar objetivo</option>
+                            <option value="_parent">_parent</option>
+                            <option value="_blank">_blank</option>
+                        </select>
+                        <div *ngIf="mensajeErrorObjetivo !==  undefined && mensajeErrorObjetivo !== ''" class="text-danger">
+                            {{mensajeErrorObjetivo}}
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Elemento Padre: </label>
+                        <input name="raiz" type="checkbox" id="raiz" checked="checked" class="activar_completar" (click)="showPadre()" /><br>
+
+                        <div *ngIf="!disable">
+                            <input type="text" data-men="0" class="form-control comple" size="50" disabled />
+                        </div>
+
+                        <div *ngIf="disable">
+                            <input type="text" name="padre" data-men="0" class="form-control comple" size="50" [(ngModel)]="objecPadre" [formControl]="controlPadre" [matAutocomplete]="auto" />
+                            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                                <mat-option *ngFor="let menu of filteredOptions  | async" [value]="menu">
+                                    {{menu.nombre}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="panel-footer text-center">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

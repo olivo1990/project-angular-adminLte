@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <h3 class="panel-title">Parámetros de Búsqueda</h3>
+            </div>
+            <form (ngSubmit)="buscar()" #heroForm="ngForm">
+                <div class="panel-body">
+                    <div class="form-group col-md-6">
+                        <label>Nombre :</label>
+                        <select type="number" [(ngModel)]="idMenuNombre" class="form-control no_reload" name="menuNombre">
+                            <option [ngValue]="undefined">Seleccionar nombre...</option>
+                            <option *ngFor="let menu of menus"  [ngValue]="menu.id">{{ menu.nombre }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Módulo :</label><br />
+                        <select type="number" [(ngModel)]="idMenuUrl" class="form-control no_reload" name="menuUrl">
+                            <option [ngValue]="undefined">Seleccionar url...</option>
+                            <option *ngFor="let menu of menus" [ngValue]="menu.id">{{ menu.url }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="panel-footer text-center">
+                    <button type="submit" name="bt_menu_search" id="bt_menu_search" class="btn btn-primary">Buscar</button>
+                    <button type="button" name="bt_menu_new" id="bt_menu_new" class="btn" [routerLink]="['/gestor-menu/crear-menu']">Crear</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

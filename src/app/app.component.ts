@@ -11,10 +11,10 @@ export class AppComponent implements OnInit {
   title = 'wom-chile';
   public isLogin: boolean;
 
-  constructor(private authService: UsuarioService, private router: Router) {
+  constructor(public authService: UsuarioService, private router: Router) {
       this.isLogin = false;
 
-      router.events.subscribe( (event: Event) => {
+      /*router.events.subscribe( (event: Event) => {
 
         if (event instanceof NavigationStart) {
   
@@ -27,11 +27,11 @@ export class AppComponent implements OnInit {
             }
             console.log(this.isLogin);
         }
-    });
+    });*/
   }
 
   ngOnInit() {
-
+    this.authService.isLoggedIn;
   }
 
 }

@@ -3,3 +3,13 @@
 .main-header {
     background-color: #3d1457 !important;
 }
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

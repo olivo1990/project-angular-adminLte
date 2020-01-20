@@ -12,11 +12,11 @@ import { Menu } from '../models/menu';
 })
 export class UsuarioService {
 
-  private API = environment.API;
+  private API = environment.APIUSER;
   private _usuario: Usuario;
   private _token: string;
-  private _menu: Menu[] = [];
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public loggedIn$ = this.loggedIn.asObservable();
 
   constructor(private http: HttpClient) {
     this._usuario = new Usuario();
@@ -29,9 +29,11 @@ export class UsuarioService {
   public get usuario(): Usuario {
     if (sessionStorage.getItem('usuario') != null) {
       this._usuario = JSON.parse(sessionStorage.getItem('usuario')) as Usuario;
+      this.loggedIn.next(true);
       return this._usuario;
     }
     this._usuario = new Usuario();
+    this.loggedIn.next(false);
     return this._usuario;
   }
 
@@ -43,17 +45,6 @@ export class UsuarioService {
       return this._token;
     }
     return null;
-  }
-
-  public get menu(): Menu[]{
-    if (this._menu.length>0) {
-      return this._menu;
-    } else if (this._menu.length === 0 && sessionStorage.getItem('menu') != null) {
-      let menu = JSON.parse(sessionStorage.getItem('menu')) as Menu[];
-      this._menu = menu;
-      return this._menu;
-    }
-    return this._menu;
   }
 
   registrar(usuario: Usuario): Observable<Usuario> {
@@ -89,10 +80,6 @@ export class UsuarioService {
         return throwError(e);
       })
     );
-  }
-
-  guardarMenu(menu: Menu[]):void{
-    sessionStorage.setItem('menu', JSON.stringify(menu));
   }
 
   guardarUsuario(datos: Usuario): void {
@@ -138,7 +125,7 @@ export class UsuarioService {
     sessionStorage.clear();
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('usuario');
-    //sessionStorage.removeItem('menu');
+    sessionStorage.removeItem('menu');
     this.loggedIn.next(false);
   }
 }

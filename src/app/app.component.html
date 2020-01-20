@@ -1,5 +1,5 @@
-<app-header *ngIf="this.isLogin"></app-header>
-<app-slidebar *ngIf="this.isLogin"></app-slidebar>
+<app-header *ngIf="authService.loggedIn$ | async"></app-header>
+<app-slidebar *ngIf="authService.loggedIn$ | async"></app-slidebar>
 <div class="content-wrapper" style="min-height: 972px;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -19,4 +19,4 @@
     </section>
     <!-- /.content -->
 </div>
-<app-footer></app-footer>
+<app-footer *ngIf="authService.loggedIn$ | async"></app-footer>

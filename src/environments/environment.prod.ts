@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  API: "sfsdfdsf"
+  APIUSER: "http://localhost:8080/api",
+  APIMENU: "http://localhost:8085/api"
 };
