@@ -16,19 +16,44 @@ declare var jQuery:any;
 export class SlidebarComponent implements OnInit {
 
   usuario: Usuario;
+  menuArreglo: any[] = [];
+
+  config = {
+    paddingAtStart: true,
+    classname: 'tree-menu-custom',
+    listBackgroundColor: '',
+    fontColor: '',
+    backgroundColor: '',
+    selectedListFontColor: '#000',
+  };
 
   constructor(private usuarioService: UsuarioService, public menuService: MenuService, private router: Router) {
     this.usuario = new Usuario();
   }
 
   ngOnInit() {
-    $(document).ready(() => {
-      const trees: any = $('[data-widget="tree"]');
-      trees.tree();
-      jQuery.AdminLTE.layout.activate();
-    });
     this.usuario = this.usuarioService.usuario;
-    this.menuService.getMenu();
+    this.loadIndex();
+    this.menuService.menuArregloObs();
+    //this.menuService.getMenu();
+  }
+
+
+  loadIndex() {
+    this.menuService.currentIndexObs.subscribe(
+      response => {
+        if (response) {
+          this.menuArreglo = response;
+        }
+      },
+      error => {
+        console.log(<any>error);
+      }
+    );
+  }
+
+  selectedItem(event:any):void{
+    this.router.navigate([event.link]);
   }
 
 }

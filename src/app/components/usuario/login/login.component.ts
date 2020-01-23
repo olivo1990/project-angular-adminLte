@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { UsuarioService } from '../../../services/usuario.service';
 import { MenuService } from '../../../services/menu.service';
 import { Location } from '@angular/common';
+import swal from 'sweetalert2';
+import { ActualizarMenuService } from '../../../services/actualizar-menu.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +19,7 @@ export class LoginComponent implements OnInit {
   textoErrorUsuario: string;
   textoErrorPassword: string;
 
-  constructor(private router: Router, private authService: UsuarioService, private menuService: MenuService, private location: Location) {
+  constructor(private router: Router, private authService: UsuarioService, private menuService: MenuService, private location: Location, private actualizarMenu: ActualizarMenuService) {
     this.usuario = new Usuario();
   }
 
@@ -47,20 +49,29 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.usuario).subscribe(response => {
       if(response.estado == 0){
-        console.log(response.msg);
+        swal.fire(
+          'Error al iniciar sesión',
+          response.msg,
+          'error'
+        )
         return;
       }
       this.authService.guardarUsuario(response.datos);
       this.usuario = this.authService.usuario;
       this.consultarMenu(this.usuario);
+      swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: `Bienvenido ${this.usuario.nombre} ${this.usuario.apellido}`,
+        showConfirmButton: false,
+        timer: 1500
+      })
+      this.actualizarMenu.conectar();
       this.router.navigate(['/inicio']);
-      //this.location. = "/inicio";
-      //window.location = "/inicio";
-      //this.consultarMenu(this.usuario);
     }, err => {
       // tslint:disable-next-line: triple-equals
       if (err.status == 400) {
-        //swal('Error Login', 'Usuario o clave incorrectas!', 'error');
+        swal.fire('Error Login', 'Usuario o clave incorrectas!', 'error');
         /*titulo = 'Mensaje del servidor';
         mensaje = 'Usuario o password incorrectos!';
         this.openAlertDialog(titulo, mensaje, true);*/

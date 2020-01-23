@@ -13,3 +13,21 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.anml-data>.label {
+    color: #000 !important;
+}
+
+.button-clean {
+    position: absolute;
+    top: 28px;
+    right: 20px;
+    background: transparent;
+    border: 0;
+    padding: 0;
+}
+
+.button-clean>.material-icons {
+    font-size: 14px;
+    margin-top: 7px
+}

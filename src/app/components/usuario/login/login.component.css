@@ -5,7 +5,7 @@
 }
 
 .login-body {
-    background-color: #3d1457 !important;
+    background-color: #cecece !important;
     position: fixed;
     display: block;
     width: 100%;
@@ -40,33 +40,35 @@
 .input-login {
     width: 100%;
     box-sizing: border-box;
-    border-radius: 100px;
+    /*border-radius: 100px;*/
     font-size: 20px;
-    border: 0;
+    /*border: 0;*/
     padding: 10px 16px;
     margin-bottom: 6px;
-    color: #fff;
-    background-color: rgba(255, 255, 255, 0.06);
+    color: #000;
+    /*background-color: rgba(255, 255, 255, 0.06);*/
+    background-color: #fff;
     transition: all 0.2s ease-in-out;
     font-weight: lighter;
     height: 45px;
 }
 
 .input-login:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    /*background-color: rgba(255, 255, 255, 0.1);*/
 }
 
 .input-login:focus {
-    background-color: rgba(255, 255, 255, 0.12);
+    /*background-color: rgba(255, 255, 255, 0.12);*/
 }
 
 ::placeholder {
-    color: rgba(255, 255, 255, 0.7);
+    /*color: rgba(255, 255, 255, 0.7);*/
     opacity: 1 !important;
 }
 
 .buttom-login {
-    background-color: #da0080;
+    width: 100% !important;
+    /*background-color: #da0080;
     border-radius: 100px;
     border: 0;
     box-sizing: border-box;
@@ -78,17 +80,17 @@
     transition: all 0.2s ease-in-out;
     font-size: 17px;
     font-weight: 600;
-    width: 100% !important;
-    ;
+    
+    ;*/
 }
 
 .buttom-login:hover {
-    opacity: 1;
+    /*opacity: 1;*/
 }
 
 .buttom-login:active {
-    background-color: #da0080;
-    opacity: 1;
+    /*background-color: #da0080;
+    opacity: 1;*/
 }
 
 .notificacion-input-error-login {

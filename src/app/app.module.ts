@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MaterialModule } from './config/material-module';
+import { NgMaterialMultilevelMenuModule } from 'ng-material-multilevel-menu';
 
 // Servicios Providers
 import { UsuarioService } from './services/usuario.service';
@@ -40,7 +41,8 @@ import { MenuDirective } from './directives/menu.directive';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    NgMaterialMultilevelMenuModule
   ],
   providers: [UsuarioService, MenuService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],

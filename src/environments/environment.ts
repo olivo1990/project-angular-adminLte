@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   APIUSER: "http://localhost:8080/api",
-  APIMENU: "http://localhost:8085/api"
+  APIMENU: "http://localhost:8085/api",
+  APISOCKET: "http://localhost:8090"
 };
 
 /*

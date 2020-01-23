@@ -2,7 +2,7 @@
 <app-slidebar *ngIf="authService.loggedIn$ | async"></app-slidebar>
 <div class="content-wrapper" style="min-height: 972px;">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <section class="content-header" *ngIf="authService.loggedIn$ | async">
         <h1>
             Dashboard
             <small>Version 2.0</small>

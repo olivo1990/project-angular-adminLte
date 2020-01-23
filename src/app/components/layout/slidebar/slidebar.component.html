@@ -24,9 +24,13 @@
         </form>
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
-        <ul class="sidebar-menu tree menu" data-widget="tree" routerLinkActive="active menu-open" [pintarMenu]="menuService.menuObs$ | async">
-            <!-- Menu -->
-        </ul>
+
+        <ng-material-multilevel-menu [configuration]='config' [items]='menuArreglo' (selectedItem)="selectedItem($event)">
+        </ng-material-multilevel-menu>
+
+        <!--<ul class="sidebar-menu tree menu" data-widget="tree" routerLinkActive="active menu-open" [pintarMenu]="menuService.menuObs$ | async">
+             Menu 
+        </ul>-->
 
         <!--<ul _ngcontent-lwu-c2="" class="sidebar-menu tree menu" data-widget="tree" ng-reflect-pintar-menu="[object Object],[object Object">
             <li title="Admin" aria-label="Admin" class="treeview menu-open" style="height: auto;"><a href="#"><i class="fab fa-slack-hash"></i> <span>Admin</span> <i class="fa fa-angle-left pull-right"></i></a>
